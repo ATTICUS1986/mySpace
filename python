@@ -1,0 +1,154 @@
+#1.list函数
+print(list('hello'))  #因为String类型就是序列类型,和list是同一类型:序列
+#['h', 'e', 'l', 'l', 'o', ',']
+
+#2.改变列表：元素赋值
+a = [1,2,3]
+a[0] = 'x'
+print(a)  #['x', 2, 3]
+#a[10] = 'y' #error  不能为一个不存在的索引赋值
+
+#3.删除元素
+num = [1,2,3,4,5,6,7,8,9]
+del num[0]
+print(num)  #[2, 3, 4, 5, 6, 7, 8, 9]
+num.remove(9)  #remove是通过指定名字来删除的
+print(num)  #[2, 3, 4, 5, 6, 7, 8]
+
+name = ['joy','bill','lily','tom','niki']
+name.remove('bill')
+print(name)  #['joy', 'lily', 'tom', 'niki']
+
+#4. 分片赋值
+name = list('Perl')
+print(name)  #['P', 'e', 'r', 'l']
+name[2:] = ['a','r']   #切片里的序号不是索引,而是指的表面上的序号
+print(name)  #['P', 'e', 'a', 'r']
+
+name = list('Perl')
+name[1:] = list('ython')
+print(name)  #['P', 'y', 't', 'h', 'o', 'n']
+
+name = 'joey'
+print(name[0:])  #joey
+print(name[1:])  #oey
+print(name[2:])  #ey
+print(name[3:])  #y
+print(name[4:])  #
+print(name[5:])  #
+print(name[-1:])  #y
+print(name[-2:])  #ey
+print(name[-3:])  #oey
+print(name[-4:])  #joey
+print(name[-5:])  #joey
+print(name[-6:])  #joey
+
+#          j    o    e    y
+#       |    |    |    |    |
+#       0    1    2    3    4    5
+# -5   -4   -3   -2   -1
+
+numbers = [1, 5]
+numbers[1:1] = [2,3,4]
+print(numbers)  #[1, 2, 3, 4, 5]
+
+numbers = [1, 5]
+print(numbers[1:1])  #[]  索引0在第一位元素之前,索引1在第一位元素之后,第二位元素之前
+
+#每一位元素的后方空隙是和它所在位相同的序号
+
+numbers = [1, 2, 3, 4, 5]
+print(numbers[1:4])  #[2, 3, 4]
+print(numbers[0:3])  #[1, 2, 3]
+
+#(重要)算切片的方法:算索引,第一个索引上的数为起始,最后一个索引上的数删去不算
+#          1     2     3     4     5
+#       0     1     2     3     4     5
+
+numbers = [1, 2, 3, 4, 5]
+numbers[1:4] = []
+print(numbers)  #[1, 5]
+
+
+#列表方法
+#方法是一个与某些对象有紧密联系的函数。一般，方法可以这样进行调用：
+# 对象.方法(参数)
+#除了对象被放置到方法名之前，并且两者之间用一个'点号'隔开
+
+#1.append          append方法用于在列表末尾追加新的对象：
+list = [1,2,3]
+list.append(4)  #append添加的是元素本身
+print(list)  #[1, 2, 3, 4]
+
+#2.count         count 方法统计某个元素在列表中出现的次数：
+a = ['to', 'be', 'or', 'not', 'to', 'be']
+print(a.count('to'))  #2
+#也可以把列表本体直接调用函数
+print(['to', 'be', 'or', 'not', 'to', 'be'].count('be'))  #2
+
+x = [1,2,[1,2],[2,2,[1,2]],1]
+print(x.count(1))  #2
+print(x.count([1,2]))  #1  嵌套的那个列表不算
+
+#3.extend         extend 方法可以在列表的末尾一次性追加另一个序列中的多个值。
+a = [1,2,3]
+b = [4,5,6]
+a.extend(b)
+print(a)  #[1, 2, 3, 4, 5, 6]
+
+a.append([8,9,10])  #(重要)append方法只能增加一个元素本身,不能加值为列表的变量
+print(a)  #[1, 2, 3, 4, 5, 6, [8, 9, 10]]  #[8,9,10]是作为一个列表元素而加入的
+
+a = [1,2,3]
+a.extend([8,9,10])  #extend方法可以增加一个列表的多个元素,不管是列表变量,还是列表本身
+print(a)  #[1, 2, 3, 8, 9, 10]  #[[8,9,10]是作为三个列表元素而加入的
+#extend只能添加列表,括号里必须是列表
+
+#4.index         index 方法用于从列表中找出某个值第一个匹配项的索引位置：
+knights = ['We', 'are', 'the', 'knights', 'who', 'say', 'ni']
+print(knights.index('who'))  #4  指定一个元素,index方法会告诉你他的索引位置
+#如果就没有这个元素时,寻找会报错
+
+#5.insert         insert 方法用于将对象插入到列表中：
+numbers = [1,2,3,5,6,7]
+numbers.insert(3,'four')
+print(numbers)  #[1, 2, 3, 'four', 5, 6, 7]
+#insert(索引,元素)
+
+#6.pop         pop 方法会移除列表中的一个元素（默认是最后一个），并且返回该元素的值：
+x = [1,2,3]
+x.pop()
+print(x)  #[1, 2]
+x.pop(0)
+print(x)  #[2]
+#         pop方法是唯一一个即能修改列表又返回元素值（除了None）的列表方法。
+
+#7.remove         remove 方法用于移除列表中某个值的第一个匹配项：
+x = ['to','be', 'or', 'not', 'to', 'be']
+x.remove('be')  #去掉的是元素的名字
+print(x)  #['to', 'or', 'not', 'to', 'be']
+#         只有第一次出现的值被移除，而不存在与列表中的值是不会移除的。
+#         remove 是一个没有返回值的原位置改变方法。它修改了列表却没有返回值。
+
+#8.reverse         reverse 方法将列表中的元素反向存放。
+x = [1,2,3]
+x.reverse()
+print(x)  #[3, 2, 1]
+#         该方法改变了列表但不返回值。
+
+#9.sort         sort 方法用于在原位置对列表进行排序。
+x = [4,6,2,1,7,9]
+x.sort()
+print(x)  #[1, 2, 4, 6, 7, 9]
+#         sort 方法修改了 x 却返回了空值。
+
+
+#四、元组：不可变序列
+#创建元组的语法很简单：如果你用逗号分隔了一些值，那么你就自动创建了元组。
+#tuple函数的功能与list函数基本上是一样的：以一个序列作为参数并把它转化为元组。
+x = [1,2,3,4]
+print(tuple(x))  #(1, 2, 3, 4)
+
+
+
+
